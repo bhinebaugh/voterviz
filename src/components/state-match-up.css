@@ -6,11 +6,17 @@
     max-width: 30em;
     margin: 1em;
   }
+  .panel header {
+      background: #874dc5;
+      padding: .6rem 2rem;
+  }
   .panel h2 {
-    background: #874dc5;
     color: #fff;
     margin: 0;
-    padding: .6rem 2rem;
+  }
+  .panel header p {
+    font-style: italic;
+    color: antiquewhite;
   }
     
   ul { padding: 0; }
