@@ -1,4 +1,6 @@
 import React, { } from 'react';
+import StateMatchUps from './components/StateMatchUps';
+import StateMatchUp from './components/StateMatchUp';
 import './App.css';
 
 // for each year (from separate JSON files),
@@ -41,20 +43,28 @@ class App extends React.Component {
       .then(result => this.setState({ dataset: result }))
   }
   
-  render = () => (
-    <div className="App">
-      <header className="App-header">
-        <h1>U.S. Presidential Elections</h1>
-      </header>
-      <h3>Candidates, 2004 &ndash; 2012</h3>
-      <ul>
-        {this.state.dataset.map((result) => <li key={`${result.id}+${result.name}`}>
-          {result.name}
-        </li>
-          )}
-      </ul>
-    </div>
-  );
+  render() {
+    let year=2004;
+    let subset=this.state.dataset.filter( result => result.year === year )
+    let maine2008 = this.state.dataset.filter( result => result.state === "Maine" && result.year === 2008)
+
+    return (
+      <div className="App">
+        <header className="App-header">
+          <h1>U.S. Presidential Elections</h1>
+        </header>
+        <h3>Candidates, 2004 &ndash; 2012</h3>
+        <StateMatchUp stateName="Maine" year={2004} voteData={maine2008}></StateMatchUp>
+        <StateMatchUps states={['AL','OK']} year={2004} data={subset}></StateMatchUps>
+        <ul>
+          {this.state.dataset.map((result) => <li key={`${result.id}+${result.name}`}>
+            {result.name}
+          </li>
+            )}
+        </ul>
+      </div>
+    )
+  }
 }
 
 export default App;

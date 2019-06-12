@@ -1,0 +1,53 @@
+.panel {
+    background: white;
+    box-shadow: 3px 3px 1px rgba(128,128,128,0.15);
+    float: left;
+    min-width: 18em;
+    max-width: 30em;
+    margin: 1em;
+  }
+  .panel h2 {
+    background: #874dc5;
+    color: #fff;
+    margin: 0;
+    padding: .6rem 2rem;
+  }
+    
+  ul { padding: 0; }
+  .panel li {
+    padding: .6em 0;
+    border-bottom: solid 1px #ddd;
+    cursor: pointer;
+    list-style: none;
+  }
+  
+
+
+
+
+
+.candidate {
+    display: flex;
+    flex-direction: row;
+}
+.candidate-details {
+    border-right: solid 1px #cecece;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    flex: 0 1 40%;
+    padding: 0 .5em;
+}
+.person-name {
+    margin: 0;
+}
+.party-name {
+    color: #999;
+    font-size: 0.75em;
+    margin: 0.2em 0 0;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+.votes {
+    flex: 1 1 60%;
+}
