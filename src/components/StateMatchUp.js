@@ -7,9 +7,9 @@ const StateMatchUp = ({stateName, year, voteData}) => {
     return (
     <div className="panel state">
         <header>
-            <h2>{stateName} &mdash; {year}</h2>
+            <h2>{stateName}<span>{year}</span></h2>
             <p>
-                {voteTotal} votes cast
+                {voteTotal.toLocaleString()} votes cast
             </p>
         </header>
         {voteData.map( result => 
@@ -20,10 +20,15 @@ const StateMatchUp = ({stateName, year, voteData}) => {
                     </p>
                 </div>
                 <div className="votes">
-                    <svg width="100" height="20" viewbox="0 0 100 20">
-                        <rect x="0" y="0" width={100*result.votes/voteTotal+"%"} height="10" />
-                    </svg>
-                    {result.votes} votes
+                    <svg width="100" height="20" viewBox="0 0 100 20">
+                        <rect 
+                            fill="#874dc5"
+                            x="0" y="0" 
+                            width={100*result.votes/voteTotal+"%"} 
+                            height="10" 
+                        />
+                    </svg><br/>
+                    {result.votes.toLocaleString()} votes
                 </div>
             </li>
         )}
