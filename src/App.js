@@ -1,5 +1,5 @@
 import React, { } from 'react';
-import StateMatchUps from './components/StateMatchUps';
+//import StateMatchUps from './components/StateMatchUps';
 import StateMatchUp from './components/StateMatchUp';
 import './App.css';
 
@@ -34,12 +34,23 @@ class App extends React.Component {
     var resultsPromises = this.sourceFiles.results.map( file =>
       fetch('/data/'+file+'.json')
         .then( response => response.json() )
-        .then( json => reformatData(json) )
+        .then( json => {
+          this.setState({
+            rawdata: {
+              ...this.state.rawdata,
+              [file]: json
+            }
+          });
+          return reformatData(json)
+        }
+)
     )
     Promise.all(resultsPromises)
-      .then(values => values.reduce(
-        (acc,res) => acc.concat(res),[])
-      )
+      .then(values => {
+        return values.reduce(
+          (acc,res) => acc.concat(res),[]
+        )
+      })
       .then(result => this.setState({ dataset: result }))
   }
   
@@ -55,12 +66,9 @@ class App extends React.Component {
         </header>
         <h3>Candidates, 2004 &ndash; 2012</h3>
         <StateMatchUp stateName="Maine" year={2004} voteData={maine2008}></StateMatchUp>
-        <StateMatchUps states={['AL','OK']} year={2004} data={subset}></StateMatchUps>
         <ul>
-          {this.state.dataset.map((result) => <li key={`${result.id}+${result.name}`}>
-            {result.name}
-          </li>
-            )}
+          {//this.state.dataset.map((result) => <li key={`${result.id}+${result.name}`}> </li> )
+          }
         </ul>
       </div>
     )
