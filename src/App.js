@@ -25,7 +25,11 @@ class App extends React.Component {
       parties: ['parties_2004', 'parties_2008', 'parties_2012'], // unnused
       results: ['results_2004', 'results_2008', 'results_2012']
     }
+    this.stateAbbrevs = [
+      "AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "DC", "FL", "GA", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY"
+    ]
     this.state = {
+      rawdata: {},
       dataset: []
     }
   }
@@ -57,7 +61,14 @@ class App extends React.Component {
   render() {
     let year=2004;
     let subset=this.state.dataset.filter( result => result.year === year )
-    let maine2008 = this.state.dataset.filter( result => result.state === "Maine" && result.year === 2008)
+    this.byState = this.stateAbbrevs.map( stateAbbrev => {
+      let results = this.state.dataset.filter( result => result.id === year.toString() + "_" + stateAbbrev )
+      return {
+        name: stateAbbrev,
+        year: year,
+        results: results
+      }
+    })
 
     return (
       <div className="App">
@@ -65,9 +76,9 @@ class App extends React.Component {
           <h1>U.S. Presidential Elections</h1>
         </header>
         <h3>Candidates, 2004 &ndash; 2012</h3>
-        <StateMatchUp stateName="Maine" year={2004} voteData={maine2008}></StateMatchUp>
         <ul>
-          {//this.state.dataset.map((result) => <li key={`${result.id}+${result.name}`}> </li> )
+          {this.byState.map((state) =>
+            <StateMatchUp stateName={state.name} year={state.year} voteData={state.results} /> )
           }
         </ul>
       </div>
