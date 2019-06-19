@@ -19,6 +19,9 @@ body {
 }
 
 #filters {
+  background: #fbf0e1;
+  display: flex;
+  flex-direction: row;
   margin: 0 1rem;
   padding: 1rem 0.5rem;
 }
@@ -34,4 +37,5 @@ body {
 #year {
   display: flex;
   flex-direction: column;
+  flex: 0 1 14em;
 }

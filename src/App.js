@@ -116,7 +116,7 @@ class App extends React.Component {
           </fieldset>
         </div>
         <ul>
-          {this.byState.map((state) =>
+          { this.byState.length === 0 ? <li>Please select states above to see details</li> : this.byState.map((state) =>
             <StateMatchUp stateName={state.name} year={state.year} voteData={state.results} /> )
           }
         </ul>
