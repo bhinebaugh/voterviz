@@ -1,13 +1,11 @@
 body {
-  background: gainsboro;
+  background: #464559;
 }
 
 .App {
 }
 
 .App-header {
-  background-color: #302a3d;
-  min-height: 200px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -20,10 +18,20 @@ body {
   color: #61dafb;
 }
 
+#filters {
+  margin: 0 1rem;
+  padding: 1rem 0.5rem;
+}
+
 #filters label {
   display: inline-block;
   padding: 4px 10px 4px 0;
   margin: 2px;
   border: solid #ccc 1px;
   border-radius: 2px;
+}
+
+#year {
+  display: flex;
+  flex-direction: column;
 }

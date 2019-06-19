@@ -1,6 +1,6 @@
 .panel {
     background: white;
-    box-shadow: 3px 3px 1px rgba(128,128,128,0.15);
+    box-shadow: 3px 3px 1px rgba(0,0,0,0.25);
     float: left;
     min-width: 18em;
     max-width: 30em;
@@ -8,18 +8,20 @@
   }
   .panel header {
       background: #874dc5;
-      padding: .6rem 2rem;
+      background: linear-gradient(336deg, #974ecb 25%, #bd5fcb);
+      border-bottom: solid 3px #874dc5;
+      padding: 1rem .8rem 0.1rem;
   }
   .panel h2 {
     color: #fff;
     margin: 0;
   }
   .panel h2 span {
-      color: #c8b2e0;
+      color: #f6d2a1;
   }
   .panel header p {
     font-style: italic;
-    color: antiquewhite;
+    color: #f6d2a1;
   }
     
   ul { padding: 0; }
@@ -46,6 +48,9 @@
     flex-direction: column;
     flex: 0 1 40%;
     padding: 0 .5em;
+}
+.candidate-details.winner .person-name {
+  font-weight: bold;
 }
 .person-name {
     margin: 0;

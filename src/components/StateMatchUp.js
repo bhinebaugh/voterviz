@@ -14,7 +14,7 @@ const StateMatchUp = ({stateName, year, voteData}) => {
         </header>
         {voteData.map( result => 
             <li className="candidate" key={result.id+result.name}>
-                <div className="candidate-details">
+                <div className={ "candidate-details " + (result.votes > voteTotal/2 ? "winner" : "") }>
                     <p className="person-name">{result.name}</p>
                     <p className="party-name">{result.parties.join(',')}
                     </p>
