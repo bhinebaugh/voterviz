@@ -29,8 +29,19 @@ class App extends React.Component {
       "AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "DC", "FL", "GA", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY"
     ]
     this.state = {
+      shown: [],
       rawdata: {},
       dataset: []
+    }
+  }
+
+  toggleStateShown = (stateAbbr) => {
+    let position = this.state.shown.indexOf(stateAbbr);
+    if (position > -1) {
+      let shortenedList = this.state.shown.filter(item => item !== stateAbbr);
+      this.setState({ shown: shortenedList })
+    } else {
+      this.setState({ shown: [...this.state.shown, stateAbbr]})
     }
   }
 
@@ -61,7 +72,7 @@ class App extends React.Component {
   render() {
     let year=2004;
     let subset=this.state.dataset.filter( result => result.year === year )
-    this.byState = this.stateAbbrevs.map( stateAbbrev => {
+    this.byState = this.state.shown.map( stateAbbrev => {
       let results = this.state.dataset.filter( result => result.id === year.toString() + "_" + stateAbbrev )
       return {
         name: stateAbbrev,
@@ -76,6 +87,17 @@ class App extends React.Component {
           <h1>U.S. Presidential Elections</h1>
         </header>
         <h3>Candidates, 2004 &ndash; 2012</h3>
+        <div id="filters">
+          <fieldset id="states">
+            <legend>Select states to show details for</legend>
+            {this.stateAbbrevs.map( stateAbbrev => 
+              <label>
+                <input type="checkbox" name={stateAbbrev} onChange={() => this.toggleStateShown(stateAbbrev)} />
+                {stateAbbrev}
+              </label>
+            )}
+          </fieldset>
+        </div>
         <ul>
           {this.byState.map((state) =>
             <StateMatchUp stateName={state.name} year={state.year} voteData={state.results} /> )
