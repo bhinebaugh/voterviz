@@ -20,7 +20,7 @@ body {
   color: #61dafb;
 }
 
-#filters #states label {
+#filters label {
   display: inline-block;
   padding: 4px 10px 4px 0;
   margin: 2px;

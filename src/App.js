@@ -25,11 +25,13 @@ class App extends React.Component {
       parties: ['parties_2004', 'parties_2008', 'parties_2012'], // unnused
       results: ['results_2004', 'results_2008', 'results_2012']
     }
+    this.years = [2004, 2008, 2012];
     this.stateAbbrevs = [
       "AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "DC", "FL", "GA", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY"
     ]
     this.state = {
       shown: [],
+      year: 2004,
       rawdata: {},
       dataset: []
     }
@@ -43,6 +45,10 @@ class App extends React.Component {
     } else {
       this.setState({ shown: [...this.state.shown, stateAbbr]})
     }
+  }
+
+  toggleYear = (year) => {
+    this.setState({ year: year });
   }
 
   componentDidMount = () => {
@@ -70,7 +76,7 @@ class App extends React.Component {
   }
   
   render() {
-    let year=2004;
+    let year = this.state.year;
     let subset=this.state.dataset.filter( result => result.year === year )
     this.byState = this.state.shown.map( stateAbbrev => {
       let results = this.state.dataset.filter( result => result.id === year.toString() + "_" + stateAbbrev )
@@ -88,6 +94,18 @@ class App extends React.Component {
         </header>
         <h3>Candidates, 2004 &ndash; 2012</h3>
         <div id="filters">
+          <fieldset id="year">
+            {this.years.map(year =>
+              <label>
+                <input type="radio"
+                  name="year"
+                  value={year}
+                  checked={year===this.state.year}
+                  onChange={() => this.toggleYear(year)}
+                />{year}
+              </label>
+            )}
+          </fieldset>
           <fieldset id="states">
             <legend>Select states to show details for</legend>
             {this.stateAbbrevs.map( stateAbbrev => 
