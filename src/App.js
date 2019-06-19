@@ -53,7 +53,7 @@ class App extends React.Component {
 
   componentDidMount = () => {
     var resultsPromises = this.sourceFiles.results.map( file =>
-      fetch('/data/'+file+'.json')
+      fetch('data/'+file+'.json')
         .then( response => response.json() )
         .then( json => {
           this.setState({
@@ -77,7 +77,6 @@ class App extends React.Component {
   
   render() {
     let year = this.state.year;
-    let subset=this.state.dataset.filter( result => result.year === year )
     this.byState = this.state.shown.map( stateAbbrev => {
       let results = this.state.dataset.filter( result => result.id === year.toString() + "_" + stateAbbrev )
       return {
@@ -92,9 +91,9 @@ class App extends React.Component {
         <header className="App-header">
           <h1>U.S. Presidential Elections</h1>
         </header>
-        <h3>Candidates, 2004 &ndash; 2012</h3>
         <div id="filters">
           <fieldset id="year">
+            <legend>Select election year</legend>
             {this.years.map(year =>
               <label>
                 <input type="radio"
