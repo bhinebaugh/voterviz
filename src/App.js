@@ -1,3 +1,4 @@
+import Datamap from 'datamaps';
 import React, { } from 'react';
 //import StateMatchUps from './components/StateMatchUps';
 import StateMatchUp from './components/StateMatchUp';
@@ -35,6 +36,7 @@ class App extends React.Component {
       rawdata: {},
       dataset: []
     }
+
   }
 
   toggleStateShown = (stateAbbr) => {
@@ -52,6 +54,10 @@ class App extends React.Component {
   }
 
   componentDidMount = () => {
+    this.map = new Datamap({
+      element: document.getElementById("map"),
+      scope: 'usa'
+    })
     var resultsPromises = this.sourceFiles.results.map( file =>
       fetch('data/'+file+'.json')
         .then( response => response.json() )
