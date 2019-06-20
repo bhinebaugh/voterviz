@@ -2,6 +2,7 @@ import Datamap from 'datamaps';
 import React, { } from 'react';
 //import StateMatchUps from './components/StateMatchUps';
 import StateMatchUp from './components/StateMatchUp';
+import usStates from './us_states.json';
 import './App.css';
 
 // for each year (from separate JSON files),
@@ -36,7 +37,6 @@ class App extends React.Component {
       rawdata: {},
       dataset: []
     }
-
   }
 
   toggleStateShown = (stateAbbr) => {
@@ -56,7 +56,17 @@ class App extends React.Component {
   componentDidMount = () => {
     this.map = new Datamap({
       element: document.getElementById("map"),
-      scope: 'usa'
+      scope: 'usa',
+      done: (datamap) => {
+        datamap.svg.selectAll('.datamaps-subunit').on('click', (geography) => {
+          let clicked = usStates.filter(st => st.name === geography.properties.name)
+          this.toggleStateShown(clicked[0].abbreviation)
+        })
+        // function(geography) {
+        //     console.log(geography.properties.name);
+        //     this.toggleStateShown(geography.properties.name)
+        // })
+      }
     })
     var resultsPromises = this.sourceFiles.results.map( file =>
       fetch('data/'+file+'.json')
