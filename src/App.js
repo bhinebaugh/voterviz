@@ -104,9 +104,6 @@ class App extends React.Component {
 
     return (
       <div className="App">
-        <header className="App-header">
-          <h1>U.S. Presidential Elections</h1>
-        </header>
         <div id="filters">
           <fieldset id="year">
             <legend>Select election year</legend>
@@ -118,15 +115,6 @@ class App extends React.Component {
                   checked={year===this.state.year}
                   onChange={() => this.toggleYear(year)}
                 />{year}
-              </label>
-            )}
-          </fieldset>
-          <fieldset id="states">
-            <legend>Select states to show details for</legend>
-            {this.stateAbbrevs.map( stateAbbrev => 
-              <label>
-                <input type="checkbox" name={stateAbbrev} onChange={() => this.toggleStateShown(stateAbbrev)} />
-                {stateAbbrev}
               </label>
             )}
           </fieldset>
